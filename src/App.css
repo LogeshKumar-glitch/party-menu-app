@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+/* Global */
+* { box-sizing: border-box; }
+body, html, #root { height: 100%; margin: 0; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background: #fafafa; color: #222; }
+.app-container { max-width: 1200px; margin: 18px auto; padding: 18px; position: relative; }
+
+/* SearchBar */
+.search-input {
+  width: 640px;
+  max-width: calc(100% - 220px);
+  padding: 12px 16px;
+  border-radius: 28px;
+  border: 1px solid #e6e6e6;
+  background: white;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Avatar group */
+.avatar-group { display:flex; gap:8px; align-items:center; }
+.avatar { width:40px; height:40px; border-radius:50%; overflow:hidden; border:3px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,0.08); background:#eee; }
+.avatar img { width:100%; height:100%; object-fit:cover; }
+
+/* Tabs row */
+.tabs-row { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom: 14px; flex-wrap:wrap; }
+.tabs { display:flex; gap:10px; align-items:center; }
+.tab { padding:8px 16px; border-radius:20px; border:none; background:#f0f0f0; cursor:pointer; font-weight:600; box-shadow:0 2px 4px rgba(0,0,0,0.03); }
+.tab.active { background: orange; color: #fff; box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+
+/* Veg toggle */
+.veg-toggle { display:flex; align-items:center; gap:8px; font-weight:500; }
+
+/* Cuisine header */
+.cuisine-section { margin-top: 18px; }
+.cuisine-header { display:flex; align-items:center; gap:12px; justify-content:flex-start; margin-bottom:12px; }
+.cuisine-header h2 { margin:0; font-size:18px; }
+.cuisine-meta { color:#666; font-size:13px; }
+
+/* Dish list layout (cards) */
+.dish-list { display:flex; flex-direction:column; gap:18px; }
+.dish-card-wrapper { display:flex; gap:16px; align-items:stretch; background:white; border-radius:12px; padding:14px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+.dish-card-left { flex:1; display:flex; flex-direction:column; }
+.dish-name { margin: 0 0 6px; font-size:18px; }
+.dish-meta-row { margin-bottom:6px; }
+.badge { padding:4px 8px; border-radius:12px; font-size:12px; color:white; display:inline-block; }
+.badge.veg { background:#2e7d32; }
+.badge.nonveg { background:#c62828; }
+
+.dish-desc { color:#555; margin:0 0 12px; }
+
+.dish-actions { display:flex; gap:10px; align-items:center; margin-top:auto; }
+.link-btn { background: transparent; border:none; color:#ff8f00; font-weight:600; cursor:pointer; padding:8px; }
+.btn { padding:8px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:600; }
+.btn.add { background:#fff3e0; color:#e65100; border:1px solid #ffd8a8; }
+.btn.remove { background:#ffebee; color:#b71c1c; border:1px solid #ffcdd2; }
+.btn.ghost { background:transparent; border:1px solid #e6e6e6; color:#333; }
+
+/* image block on right */
+.dish-card-right img { width:260px; height:160px; object-fit:cover; border-radius:10px; }
+
+/* Sticky footer */
+.sticky-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 1200px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:12px 18px;
+  background:#fff;
+  border-top:1px solid #eee;
+  box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* Footer elements */
+.footer-left { font-weight:700; padding-left:8px; }
+.footer-right { display:flex; gap:10px; align-items:center; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+/* Modal */
+.modal-backdrop { position:fixed; inset:0; background: rgba(0,0,0,0.45); display:flex; justify-content:center; align-items:center; z-index:2000; }
+.modal.large { width:720px; max-width:92%; background:#fff; border-radius:14px; overflow:hidden; }
+.modal-top img { width:100%; height:320px; object-fit:cover; display:block; }
+.modal-body { padding:18px; }
+.modal-actions { display:flex; gap:10px; margin-top:12px; }
 
-.App-link {
-  color: #61dafb;
-}
+/* Summary screen */
+.summary-screen { padding:18px; background:#fff; border-radius:10px; box-shadow: 0 6px 18px rgba(0,0,0,0.04); }
+.summary-header { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+.summary-content { display:flex; gap:24px; align-items:flex-start; }
+.summary-dishes { width:240px; }
+.summary-ingredients { flex:1; }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Responsive */
+@media (max-width: 880px) {
+  .dish-card-wrapper { flex-direction: column; }
+  .dish-card-right img { width:100%; height:220px; }
+  .search-input { width: 100%; max-width: 100%; }
+  .sticky-footer { padding:10px; left:0; right:0; width:100%; box-shadow: 0 -6px 12px rgba(0,0,0,0.06); }
 }
